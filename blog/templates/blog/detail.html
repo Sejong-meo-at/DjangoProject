@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <th>번호</th>
+        <td>{{post.id}}</td>
+      </tr>
+      <tr>
+        <th>작성자</th>
+        <td>{{post.auther}}</td>
+      </tr>
+      <tr>
+        <th>제목</th>
+        <td>{{post.title}}</td>
+      </tr>
+      <tr>
+        <th>내용</th>
+        <td>{{post.text | linebreaks}}</td>
+      </tr>
+      <tr>
+        <th>날짜</th>
+        <td>{{post.published_date}}</td>
+      </tr>
+    </table>
+  </body>
+</html>

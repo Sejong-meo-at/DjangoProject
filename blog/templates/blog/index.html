@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <a href="{% url 'new' %}">글쓰기</a>
+    <table border="1">
+      {% for post in posts %}
+        <tr>
+          <td>{{post.id}}</td>
+          <td><a href="{% url 'detail' pk=post.id %}">{{post}}</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

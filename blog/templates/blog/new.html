@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends 'blog/base.html' %}
+
+{% block content %}
     <form method="post">{% csrf_token %}
       {{form.as_p}}
       <input type="submit" name="" value="저장">
     </form>
-  </body>
-</html>
+{% endblock %}

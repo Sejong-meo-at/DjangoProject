@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 def index(request):
@@ -21,13 +21,23 @@ def new(request):
         form = PostForm()
         return render(request, 'blog/new.html', {'form':form})
 
-def detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-
-    return render(request, "blog/detail.html", {'post':post})
-
 def update(request, pk):
     pass
 
 def delete(request, pk):
-    pass
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('main')
+
+def detail_and_add_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/detail.html', {'post':post,'form': form})

@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends 'blog/base.html' %}
+
+{% block content %}
     <a href="{% url 'new' %}">글쓰기</a>
     <table border="1">
       {% for post in posts %}
@@ -14,5 +10,4 @@
         </tr>
       {% endfor %}
     </table>
-  </body>
-</html>
+{% endblock %}

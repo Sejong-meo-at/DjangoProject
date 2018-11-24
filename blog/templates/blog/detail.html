@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <script type="text/javascript">
+      function delete_post(){
+        alert("삭제 되었습니다.")
+        location.href = "{% url 'delete' post.id %}"
+      }
+      function goHome(){
+        location.href = "{% url 'main' %}"
+      }
+    </script>
+
     <table border="1">
       <tr>
         <th>번호</th>
@@ -27,5 +33,23 @@
         <td>{{post.published_date}}</td>
       </tr>
     </table>
-  </body>
-</html>
+    <button type="button" name="button" onclick="goHome()">홈 화면</button>
+    <button type="button" name="button" onclick="delete_post()">삭제하기</button>
+    <hr>
+    <form class="" action="{% url 'detail' pk=post.pk %}" method="post">{% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" name="" value="댓글 달기">
+    </form>
+    <hr>
+    <h2><strong>댓글</strong></h2>
+    {% for comment in post.comments.all %}
+    <div>
+        <div>{{ comment.created_date }}</div>
+        <strong>{{ comment.title }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+    </div>
+    <hr>
+    {% empty %}
+    <p>첫 댓글을 달아 보세요!</p>
+    {% endfor %}
+{% endblock %}

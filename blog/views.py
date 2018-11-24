@@ -29,8 +29,11 @@ def update(request, pk):
 @login_required
 def delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('main')
+    if request.user == post.autor:
+        post.delete()
+        return redirect('main')
+    else:
+        return redirect('detail', pk=post.pk)
 
 @login_required
 def detail_and_add_comment(request, pk):
@@ -44,7 +47,8 @@ def detail_and_add_comment(request, pk):
             return redirect('detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/detail.html', {'post':post,'form': form})
+        okDelete = (request.user == post.author)
+    return render(request, 'blog/detail.html', {'post':post,'form': form, 'okDelete':okDelete})
 
 def signup(request):
     if request.method == "POST":

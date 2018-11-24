@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <th>작성자</th>
-        <td>{{post.auther}}</td>
+        <td>{{post.author}}</td>
       </tr>
       <tr>
         <th>제목</th>
@@ -34,7 +34,8 @@
       </tr>
     </table>
     <button type="button" name="button" onclick="goHome()">홈 화면</button>
-    {% if user.username == post.auther %}
+
+    {% if okDelete %}
       <button type="button" name="button" onclick="delete_post()">삭제하기</button>
     {% endif %}
     <hr>

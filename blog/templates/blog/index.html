@@ -1,7 +1,6 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <a href="{% url 'new' %}">글쓰기</a>
     <table border="1">
       {% for post in posts %}
         <tr>

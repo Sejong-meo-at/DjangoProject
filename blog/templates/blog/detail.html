@@ -34,7 +34,9 @@
       </tr>
     </table>
     <button type="button" name="button" onclick="goHome()">홈 화면</button>
-    <button type="button" name="button" onclick="delete_post()">삭제하기</button>
+    {% if user.username == post.auther %}
+      <button type="button" name="button" onclick="delete_post()">삭제하기</button>
+    {% endif %}
     <hr>
     <form class="" action="{% url 'detail' pk=post.pk %}" method="post">{% csrf_token %}
       {{form.as_p}}

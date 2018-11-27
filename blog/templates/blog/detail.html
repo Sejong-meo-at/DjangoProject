@@ -9,6 +9,10 @@
       function goHome(){
         location.href = "{% url 'main' %}"
       }
+      function update_post(){
+        alert("수정 페이지로 이동합니다.")
+        location.href = "{% url 'update' post.id %}"
+      }
     </script>
 
     <table border="1">
@@ -37,6 +41,7 @@
 
     {% if okDelete %}
       <button type="button" name="button" onclick="delete_post()">삭제하기</button>
+      <button type="button" name="button" onclick="update_post()">수정하기</button>
     {% endif %}
     <hr>
     <form class="" action="{% url 'detail' pk=post.pk %}" method="post">{% csrf_token %}

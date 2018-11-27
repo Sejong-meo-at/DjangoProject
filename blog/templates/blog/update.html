@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <script type="text/javascript">
+    function goDetail() {
+      alert("수정을 취소합니다. \n 수정하는던 내용은 삭제됩니다.")
+      location.href = "{% url 'detail' post.id %}"
+    }
+  </script>
+
+  <h1>수정 페이지 입니다.</h1>
+  <form method="POST" action="{% url 'update' post.id%}" class="sign-in-form">
+  {% csrf_token %}
+    <h2 class="sub-title"> 로그인 </h2>
+    <!-- <input type="hidden" name="next" value="">
+    {{form.as_p}} >> 기본으로 내장된 로그인 폼을 아래와 같이 커스터마이징 한다-->
+    <div class="form-group">
+      <label for="{{ form.title.id_for_label }}">title</label>
+      <input class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" type="text"  value="{{post.title}}"/>
+    </div>
+    <div class="form-group">
+      <label for="{{ form.title.id_for_label }}">text</label>
+      <textarea name="{{form.text.html_name}}" id="{{form.text.id_for_label}}" rows="8" cols="80">{{post.text}}</textarea>
+    </div>
+    <input type="submit" class="save btn btn-success" value="수정하기">
+  </form>
+  <button type="button" onclick="goDetail()">수정 취소</button>
+{% endblock %}

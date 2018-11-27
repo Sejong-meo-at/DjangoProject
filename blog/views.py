@@ -23,8 +23,22 @@ def new(request):
         form = PostForm()
         return render(request, 'blog/new.html', {'form':form})
 
+@login_required
 def update(request, pk):
-    pass
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('detail', pk=post.pk)
+    else:
+        post = get_object_or_404(Post, pk=pk)
+        form = PostForm()
+    return render(request, 'blog/update.html', {'post':post,'form':form})
+
+
 
 @login_required
 def delete(request, pk):

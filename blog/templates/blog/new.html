@@ -1,8 +1,23 @@
+
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <form method="post">{% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" name="" value="저장">
-    </form>
+
+<h1>수정 페이지 입니다.</h1>
+<form method="POST" action="{% url 'new' %}" class="sign-in-form">
+{% csrf_token %}
+<div class="form-group">
+  <label for="{{ form.change_word.id_for_label }}">바뀔 단어 : </label>
+  <input class="form-control" id="{{ form.change_word.id_for_label }}" name="{{ form.change_word.html_name }}" type="text"/>
+</div>
+<div class="form-group">
+  <label for="{{ form.word_mean.id_for_label }}">단어 뜻 : </label>
+  <input class="form-control" id="{{ form.word_mean.id_for_label }}" name="{{ form.word_mean.html_name }}" type="text" />
+</div>
+<div class="form-group">
+  <label for="{{ form.change_word_reason.id_for_label }}">바꾸는 이유 : </label>
+  <textarea name="{{form.change_word_reason.html_name}}" id="{{form.change_word_reason.id_for_label}}" rows="8" cols="80"></textarea>
+</div>
+<input type="submit" class="save btn btn-success" value="제출하기">
+</form>
 {% endblock %}
